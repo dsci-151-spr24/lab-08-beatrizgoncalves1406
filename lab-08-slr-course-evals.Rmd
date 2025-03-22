@@ -70,7 +70,7 @@ You can also find this information [here](https://www.openintro.org/data/index.p
     Is the distribution skewed?
     What does that tell you about how students rate courses?
     Is this what you expected to see?
-    Why, or why not?
+    Why, or why not? ***The distribution is skewed, which means that many students are rating their courses positively. I would expect the ratings to be more evenly distributed. I assumed that there would be some sort of negative data since most students who do reviews are complaining about the professor.***
     Include any summary statistics and visualizations you use in your response.
 ```{r}
 evals %>%
@@ -100,7 +100,7 @@ evals %>%
 ```
 
 3.  Recreate the scatterplot from Exercise 2, but this time use\
-    `geom_jitter()`? What does "jitter" mean? What was misleading about the initial scatterplot?
+    `geom_jitter()`? What does "jitter" mean? What was misleading about the initial scatterplot? ***Jitter is just a tool that adds a small amount of random variation to each point so it is easier to distinguish certain points that potentially overlap. The initial scatter plot was misleading because there were numerous points overlapping in the plot.***
 
 ```{r}
 evals %>%
@@ -127,7 +127,7 @@ score_bty_fit <- linear_reg() %>%
   set_engine("lm") %>%
   fit(score~bty_avg, data = evals)
 
-score_bty_fit %>% tidy() %>% flextable()
+score_bty_fit %>% tidy() %>% flextable() 
 ```
 ***The linear model is:***
 ***score = 3.88 + 0.07 * Beauty Rating***
@@ -226,7 +226,10 @@ $$\widehat{score} = 4.14 + 0.14\times teaching + 0.02\times Tenure track$$
 
 14. Create another new variable called `tenure_eligible` that labels `"teaching"` faculty as `"no"` and labels `"tenure track"` and `"tenured"` faculty as `"yes"`.
 
-
-
-
+```{r}
+evals <- evals %>%
+  mutate(tenure_eligible = recode(rank, "tenure rack" = "yes", "tenured" = "yes", "teaching" = "no"))
+```
+                                  
+                                  
 🧶 ✅ ⬆️ Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
